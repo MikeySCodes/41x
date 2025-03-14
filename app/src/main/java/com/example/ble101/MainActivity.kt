@@ -1,18 +1,9 @@
-package com.example.ble101;
+package com.example.ble101
 
-import android.os.Bundle;
-import android.view.View;
-import androidx.activity.ComponentActivity;
-import androidx.activity.enableEdgeToEdge;
-import androidx.activity.compose.setContent;
-import androidx.compose.foundation.layout.fillMaxSize;
-import androidx.compose.foundation.layout.padding;
-import androidx.compose.material3.Scaffold;
-import androidx.compose.material3.Text;
-import androidx.compose.runtime.Composable;
-import androidx.compose.ui.Modifier;
-import androidx.compose.ui.tooling.preview.Preview;
-import com.example.ble101.ui.theme.BLE101Theme;
+import android.os.Bundle
+import android.view.View
+import androidx.activity.ComponentActivity
+import androidx.activity.enableEdgeToEdge
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,11 +12,23 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
     }
 
-    fun startBLuetooth(view: View) {
+    fun startBluetooth(view: View) {
         // TODO: Add Bluetooth start logic here
     }
 
-    fun searchBLuetooth(view: View) {
+    fun searchBluetooth(view: View) {
         // TODO: Add Bluetooth search logic here
+    }
+
+    fun connectBluetooth(view: View) {
+        // TODO: Add Bluetooth connect logic here
+    }
+
+    fun discoverServices(view: View) {
+        // TODO: Add service discovery logic here
+    }
+
+    fun Disconnect(view: View) {
+        // TODO: Add disconnect logic here
     }
 }
