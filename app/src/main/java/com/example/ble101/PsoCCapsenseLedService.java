@@ -147,5 +147,31 @@ public class PsoCCapsenseLedService extends Service {
         // We will scan just for the CAR's UUID
         ParcelUuid PUuid = new ParcelUuid(capsenseLedService);
         ScanFilter filter = new ScanFilter.Builder().setServiceUuid(PUuid).build();
+        filters.add(filter);
+
+        // Check permissions if on Android 12 or higher
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                mLEScanner.startScan(filters, settings, mScanCallback);
+            } else {
+                Log.e(TAG, "BLUETOOTH_SCAN permission not granted");
+            }
+        } else {
+            // For Android 11 and below
+            mLEScanner.startScan(filters, settings, mScanCallback);
+        }
     }
+
+    // Add a ScanCallback for processing results
+    private android.bluetooth.le.ScanCallback mScanCallback = new android.bluetooth.le.ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, android.bluetooth.le.ScanResult result) {
+            BluetoothDevice device = result.getDevice();
+            // Broadcast the device found
+            Intent intent = new Intent(ACTION_BLESCAN_CALLBACK);
+            intent.putExtra("device", device);
+            sendBroadcast(intent);
+        }
+    };
 }
